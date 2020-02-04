@@ -6,7 +6,7 @@ pipeline{
             sh 'echo "Hello World"'
             sh '''
                 echo "Multiline shell steps works too"
-                la -lah
+                ls -lah
                 '''
                   }
             }
