@@ -1,13 +1,11 @@
 pipeline{
     agent any
     stages {
-        stage('Build')  {
+        stage('Upload to AWS')  {
             steps {
-            sh 'echo "Hello World"'
-            sh '''
-                echo "Multiline shell steps works too"
-                ls -lah
-                '''
+                withAWS(credentials: 'AKIAZZKH3T3VTGMSHU43 \(Static HTML publisher in AWS\)', region: 'eu-central-1'){
+                    s3Delete(bucket: 'udacity-pipeline-project', path:'**/*')
+                    s3Upload(bucket: 'udacity-pipeline-project', workingDir:'build', includePathPattern:'**/*');
                   }
             }
     }
